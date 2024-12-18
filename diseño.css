@@ -1,0 +1,26 @@
+body {
+    display: all;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 50;
+    background-color: #d22d2d;
+}
+
+.carrusel {
+    position: CENTER;
+    width: 100%;
+    max-width: 400px;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: left;
+    justify-content: relative;
+}
+
+.imagen {
+    flex: 1;
+    background-position: flex;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
