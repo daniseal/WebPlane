@@ -1,35 +1,28 @@
 <!DOCTYPE html>
-<HTml>
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web planes</title>
-    <link rel=" icon" href="img/Splash.ico" />
-    <link rel="stylesheet" href="diseño.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="planes.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="img/Splash.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="modern.css">
 
-
-
-</head>
 <style>
     body {
         background-image: url('https://cdn.wallpapersafari.com/89/73/6XjmOQ.jpg');
         background-size: cover;
     }
 </style>
+</head>
+<body>
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark " style="z-index: 50;">
-    <a class="navbar-brand" href="#">
-        <img src="img/Splash.ico" alt="" width="90" height="35">
-    </a>
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">JetPlanes</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="WebPlanes.html">
+            <img src="img/Splash.ico" alt="Logo JetPlanes" width="90" height="35">
+            <span>JetPlanes</span>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -38,8 +31,20 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="Tanques.html">Tanques</a>
                 </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="WWI.html">WWI</a>
+                </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="WWII.html">WWII</a>
+                </li>
 
+    <li class="nav-item">
+        <a class="nav-link active" href="WarBirds.html">WarBirds</a>
+    </li>
 
+                <li class="nav-item">
+                    <a class="nav-link text-warning" href="Simulador3D.html">Simulador 3D</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Link
@@ -56,10 +61,12 @@
                 </li>
 
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+<form class="d-flex" role="search">
+    <input class="form-control me-2 w-25" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+
         </div>
     </div>
 </nav>
@@ -67,64 +74,61 @@
 
 <div class="container">
     <br>
-    <div id="theCarousel" class="carousel slide" data-ride="carousel">
+    <div id="theCarousel" class="carousel slide" data-bs-ride="carousel">
 
-        <ol class="carousel-indicators">
-            <li data-target="#theCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#theCarousel" data-slide-to="1"></li>
-            <li data-target="#theCarousel" data-slide-to="2"></li>
-            <li data-target="#theCarousel" data-slide-to="3"></li>
-            <li data-target="#theCarousel" data-slide-to="4"></li>
-            <li data-target="#theCarousel" data-slide-to="5"></li>
-            <li data-target="#theCarousel" data-slide-to="6"></li>
-            <li data-target="#theCarousel" data-slide-to="7"></li>
-            <li data-target="#theCarousel" data-slide-to="8"></li>
-            <li data-target="#theCarousel" data-slide-to="9"></li>
-            <li data-target="#theCarousel" data-slide-to="10"></li>
-            <li data-target="#theCarousel" data-slide-to="11"></li>
-            <li data-target="#theCarousel" data-slide-to="12"></li>
-            <li data-target="#theCarousel" data-slide-to="13"></li>
-            <li data-target="#theCarousel" data-slide-to="14"></li>
-            <li data-target="#theCarousel" data-slide-to="15"></li>
-            <li data-target="#theCarousel" data-slide-to="16"></li>
-            <li data-target="#theCarousel" data-slide-to="17"></li>
-            <li data-target="#theCarousel" data-slide-to="18"></li>
-            <li data-target="#theCarousel" data-slide-to="19"></li>
-            <li data-target="#theCarousel" data-slide-to="20"></li>
-            <li data-target="#theCarousel" data-slide-to="21"></li>
-
-        </ol>
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Dassault Mirage 2000"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="1" aria-label="Sukhoi Su-57, Su-34 y Su-35"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="2" aria-label="AGM-114"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="3" aria-label="Supermarine Spitfire"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="4" aria-label="Messerschmitt Bf 109"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="5" aria-label="Mil Mi-24"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="6" aria-label="Kamov Ka-52"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="7" aria-label="Lockheed Martin FB-22 Strike Raptor"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="8" aria-label="Dassault Rafale"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="9" aria-label="IAI KFIR"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="10" aria-label="Bomba GPB — Ace Combat 7"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="11" aria-label="Mikoyan MiG-31"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="12" aria-label="Sukhoi Su-35"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="13" aria-label="Misil HVAA — Ace Combat 7"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="14" aria-label="Panavia Tornado"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="15" aria-label="F-16 Fighting Falcon"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="16" aria-label="Sukhoi Su-57"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="17" aria-label="Sukhoi Su-34"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="18" aria-label="Tupolev Tu-144"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="19" aria-label="Lockheed Martin F-35 Lightning II"></button>
+            <button type="button" data-bs-target="#theCarousel" data-bs-slide-to="20" aria-label="Túpolev Tu-160 «Cisne blanco»"></button>
+        </div>
         <div class="wpbuttons">
-            <a href="https://x.com/home?lang=es" class="wppt"><img src="/img/logotipos.png" alt="Share on Pinterest" width="25" height="25" class="wppt"></a>
-            <a href="https://www.instagram.com/" class="wppt"><img src="/img/instagram.png" alt="Share on Pinterest" width="25" height="25" class="wppt"></a>
-            <a href="https://pinterest.com/pin/create/button/?url=IAI+Kfir+Wallpaper&amp;media=https://wallpapercave.com/iai-kfir-wallpapers%23wp13013167" class="wppt"><img src="/img/pinterest.png" alt="Share on Pinterest" width="25" height="25" class="wppt"></a>
+            <a href="https://x.com/home?lang=es" class="wppt"><img src="img/logotipos.png" alt="X" width="25" height="25" class="wppt"></a>
+            <a href="https://www.instagram.com/" class="wppt"><img src="img/instagram.png" alt="Instagram" width="25" height="25" class="wppt"></a>
+            <a href="https://pinterest.com/pin/create/button/?url=IAI+Kfir+Wallpaper&amp;media=https://wallpapercave.com/iai-kfir-wallpapers%23wp13013167" class="wppt"><img src="img/pinterest.png" alt="Pinterest" width="25" height="25" class="wppt"></a>
         </div>
 
 
 
 
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="img/2.jpg" alt="w-100">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="img/2.jpg" class="d-block w-100" alt="Dassault Mirage 2000">
                 <div class="carousel-caption d-none d-md-block">
                     <h3 style="color: rgb(0, 0, 0);">Dassault Mirage 2000 </h3>
                     <p style="color:#00a251fc;  font-size:18px; ">El Dassault Mirage 2000 es un caza a reacción de cuarta generación, polivalente y de un solo motor de la familia Mirage, fabricado por la compañía francesa Dassault Aviation. Fue diseñado a finales de la década de 1970, como un caza
-                        ligero basado en el Mirage III, para el Ejército del Aire Francés</p3>
+                        ligero basado en el Mirage III, para el Ejército del Aire Francés</p>
                         <p style="color:#347956 ">Velocidad máxima: 2.336 km/h // Alcance: 1.550 km // Peso: 7.500 kg // Tipos de motores: Turbofán, Snecma M53</p>
                 </div>
             </div>
 
-            <div class="item ">
-                <img src="img/su-34.jpg" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/su-34.jpg" class="d-block w-100" alt="Sukhoi Su-57, Su-34 y Su-35">
                 <div class="carousel-caption d-none d-md-block ">
-                    <h3>SU-57 FELON // SU-34 FULLBACK // SU-37 TERMINATOR</h3>
-                    <p style="font-size:20px" ;>
-                        . </p>
+                    <h3>Sukhoi Su-57, Su-34 y Su-35</h3>
+                    <p>Aviones rusos de Sukhoi: el Su-57 es un caza de quinta generación; el Su-34, un cazabombardero biplaza; y el Su-35, un caza polivalente.</p>
 
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/AGM-114.png " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/AGM-114.png" class="d-block w-100" alt="AGM-114">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>AGM-114</h3>
                     <p style="font-size:18px;">El AGM-114 Hellfire es un misil aire-tierra estadounidense diseñado para destruir carros de combate desde helicópteros o aviones, las primeras tres generaciones del misil Hellfire eran guiadas por láser y la cuarta generación utiliza
@@ -132,8 +136,8 @@
 
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/spitfire.jpg" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/spitfire.jpg" class="d-block w-100" alt="Supermarine Spitfire">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Supermarine Spitfire</h3>
                     <p style="font-size:18px;">El Supermarine Spitfire fue un caza monoplaza británico usado por la Royal Air Force y muchos otros países Aliados durante la Segunda Guerra Mundial. El Spitfire continuó siendo usado hasta los años 1950, tanto como caza de primera
@@ -143,8 +147,8 @@
                 </div>
             </div>
 
-            <div class="item ">
-                <img src="img/bf.jpg" alt="w-100">
+            <div class="carousel-item">
+                <img src="img/bf.jpg" class="d-block w-100" alt="Messerschmitt Bf 109">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Messerschmitt Bf 109</h3>
                     <p style="font-size:18px;">El Messerschmitt Bf 109 fue un avión de caza alemán de la Segunda Guerra Mundial, diseñado por un equipo al mando de Wilhelm Willy Emil Messerschmitt a principios de los años 30, cuando era diseñador jefe de la Bayerische Flugzeugwerke
@@ -155,8 +159,8 @@
 
 
 
-            <div class="item ">
-                <img src="img/3.jpg " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/3.jpg" class="d-block w-100" alt="Mil Mi-24">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Mil Mi-24</h3>
                     <p style="font-size:18px;">El Mil Mi-24 es un helicóptero artillado y helicóptero de ataque​ de gran tamaño y con capacidad limitada para transporte de tropas producido por la Fábrica de helicópteros Mil de Moscú desde comienzos de los años 1970.​</p>
@@ -164,8 +168,8 @@
                 </div>
             </div>
 
-            <div class="item ">
-                <img src="img/ka-52.jpg " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/ka-52.jpg" class="d-block w-100" alt="Kamov Ka-52">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Kamov Ka-52</h3>
                     <p style="font-size:18px;">El Kamov Ka-52 «Alligator» es un helicóptero de ataque biplaza todo tiempo de fabricación rusa que cuenta con el distintivo sistema de rotor coaxial del departamento de diseño de Kamov.​ Se trata de un desarrollo del monoplaza Kamov
@@ -175,85 +179,80 @@
                 </div>
             </div>
 
-            <div class="item ">
-                <img src="img/6.jpg " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/6.jpg" class="d-block w-100" alt="Lockheed Martin FB-22 Strike Raptor">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Lockheed Martin FB-22 Strike Raptor</h3>
-                    <p>Prototipo de bombardero estratégico furtivo de la Fuerza Aérea de los Estados Unidos, derivado del F-22 Raptor y destinado a sustituir al F-15E Strike Eagle.</p>
-                    <p>Tipos de motores: Turbofán, Pratt & Whitney F119 // Velocidad máxima: 2.414 km/h // Alcance: 3.000 km</p>
+                    <p>Propuesta de bombardero furtivo derivado del F-22 Raptor, concebida para ampliar su alcance y carga de ataque a tierra. La imagen es una recreación digital del concepto.</p>
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/rafale4.jpg " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/rafale4.jpg" class="d-block w-100" alt="Dassault Rafale">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Dassault Rafale</h3>
                     <p> Caza polivalente // Tipos de motores: Turbofán, Snecma M88 // Velocidad máxima: 1.912 km/h// Alcance: 3.700 km </p>
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/kfir.jpg " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/kfir.jpg" class="d-block w-100" alt="IAI KFIR">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>IAI KFIR</h3>
-                    <p> </p>
+                    <p>Caza polivalente desarrollado en Israel por IAI durante los años setenta. Se ha utilizado en misiones de combate y entrenamiento de pilotos adversarios.</p>
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/gpb.png " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/gpb.png" class="d-block w-100" alt="Bomba GPB — Ace Combat 7">
                 <div class="carousel-caption d-none d-md-block ">
-                    <h3>MISIL GPB</h3>
-                    <p style="font-size:18px;"> Es un arma destinada a la destrucción de buques enemigos que se encuentren en la superficie del mar. </p>
+                    <h3>Bomba GPB — Ace Combat 7</h3>
+                    <p>Bomba guiada representada en el videojuego Ace Combat 7 para atacar objetivos terrestres. La imagen muestra su modelo digital en el hangar del juego.</p>
                 </div>
             </div>
 
 
-            <div class="item ">
-                <img src="img/mig31.jpg " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/mig31.jpg" class="d-block w-100" alt="Mikoyan MiG-31">
                 <div class="carousel-caption d-none d-md-block ">
-                    <h3>МиГ-31</h3>
-                    <p style="color:#020f02;  font-size:18px; "> Interceptor supersónico diseñado por la oficina de diseño soviética Mikoyan para la misión de interceptación aérea y escolta táctico de aviones bombarderos, en sus misiones de combate más allá de las fronteras del país, para operaciones
-                        aéreas extraterritoriales, exosféricas, y muy retiradas de los lugares normalmente usados como base y defendidos.</p>
+                    <h3>Mikoyan MiG-31</h3>
+                    <p>Interceptor supersónico biplaza desarrollado en la Unión Soviética para la defensa aérea. Entró en servicio en 1981.</p>
                     <P>
                         Velocidad máxima: 3.000 km/h //Tipos de motores: Turbofán, Soloviev D-30 // Peso: 21.820 kg
                     </P>
                 </div>
 
             </div>
-            <div class="item ">
-                <img src="img/su-35.jpg " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/su-35.jpg" class="d-block w-100" alt="Sukhoi Su-35">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Sukhoi Su-35</h3>
-                    <p style="font-size:20px" ;> Sukhoi Su-35, ​ conocido inicialmente como Su-27M, es un caza polivalente monoplaza y bimotor desarrollado por la compañía rusa Sukhoi como un derivado del caza de superioridad aérea Su-27. Comenzó a ser desarrollado en los años 1980,
-                    </p>
-                    <P> Tipo de motor: Saturn AL-31 // Velocidad máxima: 2.778 km/h // Alcance: 3.600 km // Peso: 18.400 kg </P>
+                    <p>Caza polivalente ruso derivado del Su-27, diseñado para misiones aire-aire y aire-superficie. La versión moderna realizó su primer vuelo en 2008.</p>
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/HVAA.png " alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/HVAA.png" class="d-block w-100" alt="Misil HVAA — Ace Combat 7">
                 <div class="carousel-caption d-none d-md-block ">
-                    <h3>Misil HVAA</h3>
-                    <p style="font-size:20px" ;> "Misiles aire-aire de alta velocidad que hacen picadillo a los objetivos lentos. Su capacidad para viajar largas distancias los hace ideales para ataques sorpresa</p>
+                    <h3>Misil HVAA — Ace Combat 7</h3>
+                    <p>Misil aire-aire de alta velocidad del videojuego Ace Combat 7. La imagen corresponde al modelo digital de este armamento especial.</p>
 
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/1.jpg" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/1.jpg" class="d-block w-100" alt="Panavia Tornado">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Panavia Tornado</h3>
                     <p style="font-size:20px" ;> El Panavia Tornado es un avión de combate bimotor con ala de geometría variable que fue desarrollado conjuntamente por Reino Unido, Alemania Occidental e Italia en los años 1970</p>
-                    <p></p>
                 </div>
             </div>
 
-            <div class="item ">
-                <img src="img/F-16.png" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/F-16.png" class="d-block w-100" alt="F-16 Fighting Falcon">
                 <div class="carousel-caption d-none d-md-block ">
-                    <h3>F-16 Falcon Fighting</h3>
-                    <p style="font-size:20px" ;> El Lockheed Martin F-16 Fighting Falcon es un caza polivalente monomotor desarrollado por la compañía estadounidense General Dynamics en los años 1970 para la Fuerza Aérea de los Estados Unidos; entró en servicio en 1978</p>
+                    <h3>F-16 Fighting Falcon</h3>
+                    <p>Caza polivalente monomotor desarrollado por General Dynamics para combate aéreo y ataque a tierra. El F-16A alcanzó su capacidad operativa inicial en la USAF en enero de 1979.</p>
                     <p>Presupuesto unitario: 14.600.000–18.800.000 USD (1998) // Alcance: 4.217 km // Fabricantes: Lockheed Martin, General Dynamics, Lockheed Corporation</p>
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/SU-57.png" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/SU-57.png" class="d-block w-100" alt="Sukhoi Su-57">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Sukhoi Su-57</h3>
                     <p style="font-size:20px" ;>El Sukhoi Su-57 o Su-57 es un avión monoplaza con dos motores a reacción, de capacidad furtiva, multirrol y de quinta generación, desarrollado desde el 2002 para misiones de superioridad aérea y ataque por Sukhoi, parte de la Corporación
@@ -262,57 +261,52 @@
                 </div>
             </div>
 
-            <div class="item ">
-                <img src="img/blackDuck.jpg" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/blackDuck.jpg" class="d-block w-100" alt="Sukhoi Su-34">
                 <div class="carousel-caption d-none d-md-block ">
-                    <h3>Sukhoi Su-34 BlackDuck</h3>
-                    <p style="font-size:20px" ;>
-                        . </p>
+                    <h3>Sukhoi Su-34</h3>
+                    <p>Cazabombardero ruso biplaza diseñado para atacar objetivos terrestres y navales de día y de noche. Su cabina blindada protege a la tripulación.</p>
 
                 </div>
             </div>
-            <div class="item ">
-                <img src="img/tu7.jpg" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/tu7.jpg" class="d-block w-100" alt="Tupolev Tu-144">
                 <div class="carousel-caption d-none d-md-block ">
-                    <h3>Tupolev 144</h3>
-                    <p style="font-size:20px" ;>
-                        . </p>
+                    <h3>Tupolev Tu-144</h3>
+                    <p>Avión soviético de pasajeros diseñado para volar a velocidad supersónica. Su primer vuelo fue en 1968 y transportó pasajeros con Aeroflot entre 1977 y 1978.</p>
 
                 </div>
             </div>
 
-            <div class="item ">
-                <img src="img/F35.jpg" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/F35.jpg" class="d-block w-100" alt="Lockheed Martin F-35 Lightning II">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Lockheed Martin F-35 Lightning II</h3>
-                    <p style="font-size:20px" ;>
-                    </p>
+                    <p>Caza furtivo polivalente de quinta generación. Combina sensores integrados y capacidad de compartir información para misiones de combate aéreo y ataque a tierra.</p>
                 </div>
             </div>
 
-            <div class="item ">
-                <img src="img/tu-160.jpg" alt="w-100 ">
+            <div class="carousel-item">
+                <img src="img/tu-160.jpg" class="d-block w-100" alt="Túpolev Tu-160 «Cisne blanco»">
                 <div class="carousel-caption d-none d-md-block ">
                     <h3>Túpolev Tu-160 «Cisne blanco»</h3>
-                    <p style="font-size:20px" ;>
-                    </p>
+                    <p>Bombardero estratégico supersónico de origen soviético, con alas de geometría variable. Fue diseñado para transportar misiles de crucero de largo alcance.</p>
                 </div>
             </div>
-
-
-            <a class="left carousel-control" href="#theCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">anterior</span>
-            </a>
-            <a class="right carousel-control" href="#theCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">siguiente</span>
-            </a>
 
 
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#theCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#theCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
     </div>
 
-    </body>
+</div>
+</body>
 
-</HTml>
+</html>

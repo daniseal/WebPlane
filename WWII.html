@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armamento WWII</title>
+
+    <link rel="icon" href="img/Splash.ico">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="modern.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+<style>
+    body {
+        background: linear-gradient(rgba(10, 15, 29, 0.84), rgba(15, 23, 42, 0.92)),
+                    url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed !important;
+        background-size: cover !important;
+    }
+    .flag-icon-img {
+        width: 24px;
+        height: 16px;
+        object-fit: cover;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        margin-right: 8px;
+        vertical-align: -2px;
+    }
+    .nation-button {
+        display: inline-flex !important;
+        align-items: center !important;
+        font-weight: 600 !important;
+    }
+</style>
+</head>
+
+<body class="bg-wwii">
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark shadow-sm" style="z-index: 50;">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="WebPlanes.html">
+            <img src="img/Splash.ico" alt="Logo JetPlanes" width="40" height="40" class="rounded-circle">
+            <span class="fw-bold">JetPlanes</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link " href="WebPlanes.html">✈️ Aviones Modernos</a></li>
+                <li class="nav-item"><a class="nav-link " href="Tanques.html">🛡️ Tanques Modernos</a></li>
+                <li class="nav-item"><a class="nav-link " href="WWI.html">⚙️ WWI</a></li>
+                <li class="nav-item"><a class="nav-link active" href="WWII.html">💣 WWII</a></li>
+                <li class="nav-item"><a class="nav-link " href="WarBirds.html">🦅 WarBirds</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-warning " href="Simulador3D.html">🕹️ Simulador 3D</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <main class="page-content container">
+
+        <section class="hero-card text-center">
+            <h1>Armamento de la Segunda Guerra Mundial</h1>
+            <p>Tanques y aviones utilizados entre 1939 y 1945.</p>
+            <p>Selecciona una nación para ver su armamento.</p>
+        </section>
+
+        <section class="button-container nav nav-pills" role="tablist" aria-label="Naciones">
+            <button type="button" class="nation-button nav-link active" id="tab-usa" data-bs-toggle="pill" data-bs-target="#usa" role="tab" aria-controls="usa" aria-selected="true">
+                <img src="https://flagcdn.com/w40/us.png" class="flag-icon-img" alt="USA"> United States and Allies
+            </button>
+
+            <button type="button" class="nation-button nav-link" id="tab-germany" data-bs-toggle="pill" data-bs-target="#germany" role="tab" aria-controls="germany" aria-selected="false">
+                <img src="https://flagcdn.com/w40/de.png" class="flag-icon-img" alt="Alemania"> Nazideutschland
+            </button>
+
+            <button type="button" class="nation-button nav-link" id="tab-russia" data-bs-toggle="pill" data-bs-target="#russia" role="tab" aria-controls="russia" aria-selected="false">
+                <img src="https://flagcdn.com/w40/ru.png" class="flag-icon-img" alt="URSS"> Советский Союз
+            </button>
+
+            <button type="button" class="nation-button nav-link" id="tab-japan" data-bs-toggle="pill" data-bs-target="#japan" role="tab" aria-controls="japan" aria-selected="false">
+                <img src="https://flagcdn.com/w40/jp.png" class="flag-icon-img" alt="Japón"> 大日本帝国
+            </button>
+        </section>
+
+        <div class="tab-content">
+        <section id="usa" class="info-section tab-pane fade show active" role="tabpanel" aria-labelledby="tab-usa" tabindex="0">
+            <h2>United States and Allies</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-usa" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/m4-sherman.jpg" alt="M4 Sherman">
+                        <div class="carousel-caption"><p><strong>M4 Sherman:</strong> tanque medio producido masivamente por Estados Unidos y usado por varios ejércitos aliados.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/m26-pershing.jpg" alt="M26 Pershing">
+                        <div class="carousel-caption"><p><strong>M26 Pershing:</strong> tanque estadounidense introducido al final de la guerra con mejor blindaje y mayor potencia de fuego.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/m3-stuart.jpg" alt="M3 Stuart">
+                        <div class="carousel-caption"><p><strong>M3 Stuart:</strong> tanque ligero aliado producido en masa desde 1941.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/churchill-tank.jpg" alt="Tanque Churchill A22">
+                        <div class="carousel-caption"><p><strong>Churchill A22:</strong> tanque de infantería británico pesado y resistente, usado en Europa y el norte de África.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/memphis-belle-aircraft.jpg" alt="Boeing B-17 Memphis Belle">
+                        <div class="carousel-caption"><p><strong>Boeing B-17F Memphis Belle:</strong> bombardero pesado estadounidense conocido como la Fortaleza Volante.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/supermarine-spitfire.jpg" alt="Supermarine Spitfire">
+                        <div class="carousel-caption"><p><strong>Supermarine Spitfire:</strong> caza británico clave en la defensa aérea del Reino Unido.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-usa" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-usa" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-usa">
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="4" aria-label="Diapositiva 5"></button>
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="5" aria-label="Diapositiva 6"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="germany" class="info-section tab-pane fade" role="tabpanel" aria-labelledby="tab-germany" tabindex="0">
+            <h2>Deutschland</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-germany" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/tiger-i.jpg" alt="Tiger I">
+                        <div class="carousel-caption"><p><strong>Panzerkampfwagen VI Tiger Ausf. E:</strong> tanque pesado alemán famoso por su blindaje y su cañón de 88 mm.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/panther-tank.jpg" alt="Panther Panzer V">
+                        <div class="carousel-caption"><p><strong>Panther Panzer V:</strong> tanque medio alemán destacado por su blindaje inclinado y su potente armamento.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/tiger-ii.jpg" alt="Tiger II Königstiger">
+                        <div class="carousel-caption"><p><strong>Tiger II Königstiger:</strong> tanque pesado alemán con gran protección y elevada potencia de fuego.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/messerschmitt-bf-109.jpg" alt="Messerschmitt Bf 109">
+                        <div class="carousel-caption"><p><strong>Messerschmitt Bf 109:</strong> caza alemán muy producido y usado por la Luftwaffe durante toda la guerra.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/focke-wulf-fw-190.jpg" alt="Focke-Wulf Fw 190">
+                        <div class="carousel-caption"><p><strong>Focke-Wulf Fw 190:</strong> caza alemán con gran potencia de fuego y excelente rendimiento a baja y media altitud.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-germany" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-germany" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-germany">
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="4" aria-label="Diapositiva 5"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="russia" class="info-section tab-pane fade" role="tabpanel" aria-labelledby="tab-russia" tabindex="0">
+            <h2>Советский Союз</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-russia" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/t-34.jpg" alt="T-34">
+                        <div class="carousel-caption"><p><strong>T-34:</strong> tanque soviético famoso por su movilidad, blindaje inclinado y potencia de fuego.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/is-2.jpg" alt="IS-2">
+                        <div class="carousel-caption"><p><strong>IS-2:</strong> tanque pesado soviético usado en las fases finales de la guerra, equipado con un cañón de 122 mm.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/yakovlev-yak-9.jpg" alt="Yak-9">
+                        <div class="carousel-caption"><p><strong>Yak-9:</strong> caza soviético ágil, apreciado por su mantenimiento sencillo y buen rendimiento a baja altitud.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/ilyushin-il-2.jpg" alt="Ilyushin Il-2 Shturmovik">
+                        <div class="carousel-caption"><p><strong>Ilyushin Il-2 Shturmovik:</strong> avión de ataque terrestre soviético, robusto y efectivo contra tropas y vehículos blindados.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-russia" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-russia" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-russia">
+                    <button type="button" data-bs-target="#carousel-russia" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-russia" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-russia" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-russia" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="japan" class="info-section tab-pane fade" role="tabpanel" aria-labelledby="tab-japan" tabindex="0">
+            <h2>大日本帝国</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-japan" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/type-97-chi-ha-medium-tank.jpg" alt="Tipo 97 Chi-Ha">
+                        <div class="carousel-caption"><p><strong>Tipo 97 Chi-Ha:</strong> tanque medio japonés ampliamente producido y usado en combate.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/type-95-ha-go-light-tank.jpg" alt="Tipo 95 Ha-Go">
+                        <div class="carousel-caption"><p><strong>Tipo 95 Ha-Gō:</strong> tanque ligero japonés, uno de los blindados más utilizados por Japón durante la guerra.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/mitsubishi-a6m-zero.jpg" alt="Mitsubishi A6M Zero">
+                        <div class="carousel-caption"><p><strong>Mitsubishi A6M Zero:</strong> caza naval japonés famoso por su maniobrabilidad y autonomía.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/yokosuka-mxy-7-ohka.jpg" alt="Yokosuka MXY-7 Ohka">
+                        <div class="carousel-caption"><p><strong>Yokosuka MXY-7 Ohka:</strong> avión cohete japonés usado en ataques kamikaze hacia el final de la guerra.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-japan" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-japan" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-japan">
+                    <button type="button" data-bs-target="#carousel-japan" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-japan" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-japan" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-japan" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                </div>
+            </div>
+        </section>
+
+        </div>
+
+        <p class="mt-3 small"><a href="img/historicos/CREDITOS.md">Créditos y licencias de las fotografías</a></p>
+    </main>
+
+</body>
+</html>
+

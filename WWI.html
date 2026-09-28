@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armamento WWI</title>
+
+    <link rel="icon" href="img/Splash.ico">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="modern.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+<style>
+    body {
+        background: linear-gradient(rgba(10, 15, 29, 0.84), rgba(15, 23, 42, 0.92)),
+                    url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed !important;
+        background-size: cover !important;
+    }
+    .flag-icon-img {
+        width: 24px;
+        height: 16px;
+        object-fit: cover;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        margin-right: 8px;
+        vertical-align: -2px;
+    }
+    .nation-button {
+        display: inline-flex !important;
+        align-items: center !important;
+        font-weight: 600 !important;
+    }
+</style>
+</head>
+
+<body class="bg-wwi">
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark shadow-sm" style="z-index: 50;">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="WebPlanes.html">
+            <img src="img/Splash.ico" alt="Logo JetPlanes" width="40" height="40" class="rounded-circle">
+            <span class="fw-bold">JetPlanes</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link " href="WebPlanes.html">✈️ Aviones Modernos</a></li>
+                <li class="nav-item"><a class="nav-link " href="Tanques.html">🛡️ Tanques Modernos</a></li>
+                <li class="nav-item"><a class="nav-link active" href="WWI.html">⚙️ WWI</a></li>
+                <li class="nav-item"><a class="nav-link " href="WWII.html">💣 WWII</a></li>
+                <li class="nav-item"><a class="nav-link " href="WarBirds.html">🦅 WarBirds</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-warning " href="Simulador3D.html">🕹️ Simulador 3D</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <main class="page-content container">
+
+        <section class="hero-card text-center">
+            <h1>Armamento de la Primera Guerra Mundial</h1>
+            <p>Tanques y aviones utilizados entre 1914 y 1918.</p>
+            <p>Selecciona una nación para ver su armamento.</p>
+        </section>
+
+        <section class="button-container nav nav-pills" role="tablist" aria-label="Naciones">
+            <button type="button" class="nation-button nav-link active" id="tab-uk" data-bs-toggle="pill" data-bs-target="#uk" role="tab" aria-controls="uk" aria-selected="true">
+                <img src="https://flagcdn.com/w40/gb.png" class="flag-icon-img" alt="UK"> United Kingdom
+            </button>
+
+            <button type="button" class="nation-button nav-link" id="tab-usa" data-bs-toggle="pill" data-bs-target="#usa" role="tab" aria-controls="usa" aria-selected="false">
+                <img src="https://flagcdn.com/w40/us.png" class="flag-icon-img" alt="USA"> United States
+            </button>
+
+            <button type="button" class="nation-button nav-link" id="tab-germany" data-bs-toggle="pill" data-bs-target="#germany" role="tab" aria-controls="germany" aria-selected="false">
+                <img src="https://flagcdn.com/w40/de.png" class="flag-icon-img" alt="Alemania"> Deutsches Reich
+            </button>
+
+            <button type="button" class="nation-button nav-link" id="tab-austria" data-bs-toggle="pill" data-bs-target="#austria" role="tab" aria-controls="austria" aria-selected="false">
+                <img src="https://flagcdn.com/w40/at.png" class="flag-icon-img" alt="Austria"> Österreich-Ungarn
+            </button>
+
+            <button type="button" class="nation-button nav-link" id="tab-france" data-bs-toggle="pill" data-bs-target="#france" role="tab" aria-controls="france" aria-selected="false">
+                <img src="https://flagcdn.com/w40/fr.png" class="flag-icon-img" alt="Francia"> République française
+            </button>
+
+            <button type="button" class="nation-button nav-link" id="tab-russia" data-bs-toggle="pill" data-bs-target="#russia" role="tab" aria-controls="russia" aria-selected="false">
+                <img src="https://flagcdn.com/w40/ru.png" class="flag-icon-img" alt="Rusia"> Российская империя
+            </button>
+        </section>
+
+        <div class="tab-content">
+        <section id="uk" class="info-section tab-pane fade show active" role="tabpanel" aria-labelledby="tab-uk" tabindex="0">
+            <h2>United Kingdom</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-uk" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/british-heavy-tanks-of-the-first-world-war.jpg" alt="Tanque Mark I">
+                        <div class="carousel-caption"><p><strong>Mark I:</strong> primer tanque de combate británico, introducido en 1916 durante la Batalla del Somme.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/mark-iv-tank.jpg" alt="Tanque Mark IV">
+                        <div class="carousel-caption"><p><strong>Mark IV:</strong> versión mejorada, usada en operaciones como Passchendaele.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/sopwith-camel.jpg" alt="Sopwith Camel">
+                        <div class="carousel-caption"><p><strong>Sopwith Camel:</strong> caza biplano británico, famoso por su maniobrabilidad y dificultad de pilotaje.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/royal-aircraft-factory-s-e-5.jpg" alt="Royal Aircraft Factory SE.5">
+                        <div class="carousel-caption"><p><strong>Royal Aircraft Factory SE.5:</strong> caza versátil usado para superioridad aérea.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-uk" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-uk" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-uk">
+                    <button type="button" data-bs-target="#carousel-uk" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-uk" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-uk" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-uk" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="usa" class="info-section tab-pane fade" role="tabpanel" aria-labelledby="tab-usa" tabindex="0">
+            <h2>United States</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-usa" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/renault-ft.jpg" alt="Renault FT">
+                        <div class="carousel-caption"><p><strong>Renault FT:</strong> tanque ligero francés adoptado por Estados Unidos y usado en 1918.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/mark-viii-tank.jpg" alt="Mark VIII">
+                        <div class="carousel-caption"><p><strong>Mark VIII:</strong> tanque angloamericano desarrollado hacia el final de la guerra.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/curtiss-jn-4-jenny.jpg" alt="Curtiss JN-4 Jenny">
+                        <div class="carousel-caption"><p><strong>Curtiss JN-4 Jenny:</strong> avión de entrenamiento estadounidense, también adaptado para diferentes roles.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/liberty-l-12.jpg" alt="Liberty L-12">
+                        <div class="carousel-caption"><p><strong>Liberty L-12:</strong> motor utilizado en aviones como el Airco DH.4.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-usa" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-usa" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-usa">
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-usa" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="germany" class="info-section tab-pane fade" role="tabpanel" aria-labelledby="tab-germany" tabindex="0">
+            <h2>Deutsches Reich</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-germany" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/a7v.jpg" alt="Sturmpanzerwagen A7V">
+                        <div class="carousel-caption"><p><strong>Sturmpanzerwagen A7V:</strong> primer tanque alemán, pesado y producido en cantidades limitadas.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/a7v.jpg" alt="Tanque alemán A7V">
+                        <div class="carousel-caption"><p><strong>Sturmpanzerwagen:</strong> tanque alemán de la etapa final de la guerra.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/fokker-dr-i.jpg" alt="Fokker Dr.I">
+                        <div class="carousel-caption"><p><strong>Fokker Dr.I:</strong> triplano alemán asociado con Manfred von Richthofen, el Barón Rojo.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/albatros-d-iii.jpg" alt="Albatros D.III">
+                        <div class="carousel-caption"><p><strong>Albatros D.III:</strong> caza alemán muy usado durante 1917.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/fokker-d-vii.jpg" alt="Fokker D.VII">
+                        <div class="carousel-caption"><p><strong>Fokker D.VII:</strong> avión de combate alemán diseñado por Reinhold Platz para Fokker-Flugzeugwerke.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-germany" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-germany" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-germany">
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                    <button type="button" data-bs-target="#carousel-germany" data-bs-slide-to="4" aria-label="Diapositiva 5"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="austria" class="info-section tab-pane fade" role="tabpanel" aria-labelledby="tab-austria" tabindex="0">
+            <h2>Österreichisch-Ungarische Monarchie</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-austria" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/renault-ft.jpg" alt="Renault FT">
+                        <div class="carousel-caption"><p><strong>Renault FT:</strong> Austria-Hungría no desarrolló una gran fuerza acorazada propia; usó vehículos capturados o aliados.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/albatros-d-iii-oeffag.jpg" alt="Albatros D.III austrohúngaro">
+                        <div class="carousel-caption"><p><strong>Albatros D.III:</strong> versión austrohúngara usada en el frente italiano.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/hansa-brandenburg-c-i.jpg" alt="Hansa-Brandenburg">
+                        <div class="carousel-caption"><p><strong>Hansa-Brandenburg:</strong> aeronave empleada en misiones de reconocimiento y bombardeo.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-austria" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-austria" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-austria">
+                    <button type="button" data-bs-target="#carousel-austria" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-austria" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-austria" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="france" class="info-section tab-pane fade" role="tabpanel" aria-labelledby="tab-france" tabindex="0">
+            <h2>République française</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-france" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/renault-ft.jpg" alt="Renault FT">
+                        <div class="carousel-caption"><p><strong>Renault FT:</strong> tanque ligero revolucionario, reconocido por su torreta giratoria.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/schneider-ca1.jpg" alt="Schneider CA1">
+                        <div class="carousel-caption"><p><strong>Schneider CA1:</strong> uno de los primeros tanques franceses usados en combate.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/nieuport-17.jpg" alt="Nieuport 17">
+                        <div class="carousel-caption"><p><strong>Nieuport 17:</strong> caza ágil utilizado por pilotos franceses durante la guerra.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/spad-s-xiii.jpg" alt="SPAD S.XIII">
+                        <div class="carousel-caption"><p><strong>SPAD S.XIII:</strong> caza francés avanzado, muy importante en 1918.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-france" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-france" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-france">
+                    <button type="button" data-bs-target="#carousel-france" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-france" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-france" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-france" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="russia" class="info-section tab-pane fade" role="tabpanel" aria-labelledby="tab-russia" tabindex="0">
+            <h2>Российская империя</h2>
+
+            <div class="weapon-carousel carousel slide carousel-fade" id="carousel-russia" data-bs-interval="false">
+                <div class="weapon-carousel-slides carousel-inner">
+
+                    <article class="weapon-slide carousel-item active">
+                        <img class="d-block w-100" src="img/historicos/renault-ft.jpg" alt="Renault FT">
+                        <div class="carousel-caption"><p><strong>Renault FT:</strong> tanque ligero francés adoptado en pequeñas cantidades.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/vezdekhod.jpg" alt="Vezdekhod">
+                        <div class="carousel-caption"><p><strong>Vezdekhod:</strong> prototipo ruso que no llegó a producción masiva.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/sikorsky-ilya-muromets.jpg" alt="Sikorsky Ilya Muromets">
+                        <div class="carousel-caption"><p><strong>Sikorsky Ilya Muromets:</strong> bombardero pesado ruso, uno de los primeros de su tipo.</p></div>
+                    </article>
+
+                    <article class="weapon-slide carousel-item">
+                        <img class="d-block w-100" src="img/historicos/nieuport-11.jpg" alt="Nieuport 11">
+                        <div class="carousel-caption"><p><strong>Nieuport 11:</strong> caza francés adoptado por Rusia.</p></div>
+                    </article>
+
+                </div>
+
+                <div class="carousel-buttons">
+                    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-russia" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#carousel-russia" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators-russia">
+                    <button type="button" data-bs-target="#carousel-russia" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                    <button type="button" data-bs-target="#carousel-russia" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                    <button type="button" data-bs-target="#carousel-russia" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    <button type="button" data-bs-target="#carousel-russia" data-bs-slide-to="3" aria-label="Diapositiva 4"></button>
+                </div>
+            </div>
+        </section>
+
+        </div>
+
+        <p class="mt-3 small"><a href="img/historicos/CREDITOS.md">Créditos y licencias de las fotografías</a></p>
+    </main>
+
+</body>
+</html>
+

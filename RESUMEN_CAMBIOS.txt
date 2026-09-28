@@ -1,0 +1,112 @@
+# RESUMEN DE CAMBIOS DEL PROYECTO JETPLANES
+
+Este documento detalla todas las actualizaciones arquitectónicas y de diseño implementadas en el proyecto para asegurar un rendimiento óptimo, código limpio y una experiencia de usuario moderna.
+
+1. TECNOLOGÍAS Y LENGUAJES IMPLEMENTADOS
+--------------------------------------------------
+- HTML5 Semántico: Se reescribió la estructura completa utilizando etiquetas semánticas (<header>, <nav>, <main>, <footer>, <section>) para mejorar la accesibilidad y el SEO.
+- CSS3 y Bootstrap 5.3.3: Se migró el diseño antiguo (que mezclaba Bootstrap 3 y estilos rígidos) a la última versión pura de Bootstrap 5.3. Esto nos permitió usar utilidades nativas flexbox, carruseles integrados y diseño 100% responsivo para celulares y computadoras.
+- CSS Personalizado (modern.css): Se creó una hoja de estilos centralizada "modern.css" para manejar el tema oscuro global (Dark Theme), efectos de transición de imágenes, barras de desplazamiento personalizadas (scrollbars) y gradientes sobre los fondos.
+- JavaScript Nativo (Bootstrap Bundle): Se eliminaron los antiguos archivos .js personalizados (wwi.js, wwii.js, warbirds.js) que causaban errores de carga. Ahora toda la lógica de los carruseles y pestañas es manejada de forma nativa, optimizada y sin errores por el bundle de Bootstrap 5.
+
+2. CAMBIOS Y MEJORAS POR MÓDULO
+--------------------------------------------------
+A) Modernización de Interfaz (Global)
+- Tema Oscuro (Dark Theme): Se reemplazaron los fondos blancos y grises antiguos por una paleta oscura profesional (negro y grises profundos), ideal para temáticas militares e históricas.
+- Barra de Navegación (Navbar): Se rediseñó el menú superior para que sea fijo, permitiendo navegar rápidamente a "Aviones Modernos", "Tanques Modernos", "WWI", "WWII" y "WarBirds Históricos". Se añadió el logotipo de JetPlanes redondeado al menú.
+- Imágenes en Alta Resolución: Se sustituyeron los enlaces rotos de imágenes por fotografías estables y de alta resolución verificadas (formato ancho adaptativo).
+
+B) Módulos "WWI", "WWII" y "WarBirds Históricos"
+- Sistema de Pestañas (Nav-Pills): Se agruparon los vehículos por naciones usando un sistema moderno de pestañas. Ahora cada país o facción tiene su propia pestaña con su bandera oficial renderizada (Reino Unido, Alemania, Estados Unidos, URSS, Japón, Francia).
+- Carruseles con Efecto Fade: Dentro de la pestaña de cada nación, los vehículos se presentan en un carrusel dinámico. Cada imagen incluye un recuadro oscuro superpuesto con el título y descripción.
+- Hero Headers: Se añadieron encabezados grandes al inicio de cada página con una fotografía a pantalla completa obscurecida y un título inmenso.
+
+C) Módulos "WebPlanes" y "Tanques" (Modernidad)
+- Se depuraron y filtraron para enfocarse estrictamente en la modernidad, dejando los equipos antiguos a los módulos históricos.
+- Se unificó el diseño en base a cuadrículas (Grid Cards) de Bootstrap para mantener homogeneidad visual.
+
+3. LIMPIEZA Y OPTIMIZACIÓN
+--------------------------------------------------
+- Se limpió el código para evitar conflictos entre las herramientas y tu editor.
+- Se eliminó código obsoleto (CSS redundante y llamadas a librerías muertas).
+- Todos los archivos se formatearon con un estándar de indentación uniforme para que el código sea fácil de mantener y leer en el futuro.
+
+4. CORRECCIÓN DE CARRUSELES VERIFICADA (27/09/2026)
+--------------------------------------------------
+La revisión de los archivos guardados encontró diferencias con el resumen anterior:
+- modern.css estaba vacío y las páginas aún enlazaban CSS/JS inexistentes.
+- WebPlanes y Tanques mezclaban Bootstrap 3, 5.0.2 y 5.3.3. Había 22 indicadores
+  para 21 diapositivas y 14 indicadores para 7 diapositivas, respectivamente.
+- WWI y WWII reutilizaban fotografías de vehículos distintos a los descritos.
+  La dirección remota del Sherman devolvió HTTP 429 durante la comprobación.
+- WarBirds tenía un contenedor vacío que dependía de warbirds.js, inexistente.
+
+Correcciones realizadas:
+- Bootstrap CSS/JS unificado en 5.3.3; controles, indicadores, pestañas y estados
+  activos compatibles con esa versión, sin JavaScript personalizado adicional.
+- modern.css proporciona el estilo compartido, imágenes completas sin recortes,
+  descripciones legibles y adaptación móvil. Se conservan los carruseles existentes.
+- 39 fotografías históricas guardadas en img/historicos y asignadas a los modelos
+  correspondientes. Créditos y licencias en CREDITOS.md; fuentes en sources.json.
+- WarBirds contiene 12 aviones de WWI y 8 de WWII, reutilizando la información
+  presente en esas páginas. Ya no depende de generar las diapositivas con un JS ausente.
+- Rutas locales normalizadas, logo/favicon locales y navegación móvil ajustada.
+- README.md explica cómo iniciar el servidor. La configuración de Chrome en VS Code
+  abre WebPlanes.html en el puerto 8080; el servidor debe iniciarse previamente.
+
+Verificaciones ejecutadas:
+- Chrome: las cinco páginas, 14 carruseles y 91 diapositivas; imágenes decodificadas,
+  navegación siguiente/anterior, vuelta al inicio, indicadores y pestañas operativos.
+- Sin respuestas HTTP de error, fallos de carga ni excepciones JavaScript durante
+  esa prueba. Vista de escritorio y móvil de 390 px sin desbordamiento horizontal.
+- 74 archivos de imagen locales decodificados con Pillow sin errores.
+- Referencias locales, IDs y destinos de controles comprobados; git diff --check OK.
+
+Las imágenes de diapositivas son locales. Bootstrap, las fuentes y los fondos
+externos conservados en WebPlanes/Tanques todavía requieren conexión a Internet.
+
+5. INTEGRACIÓN DEL SIMULADOR 3D Y CORRECCIONES FINALES (ACTUALIZACIÓN 27/09/2026)
+--------------------------------------------------
+- Simulador 3D (Simulador3D.html): Implementado exitosamente usando el motor gráfico Three.js (versión UMD por CDN) en un archivo autocontenido, evitando así problemas de CORS y bloqueos de Módulos ES6 en servidores locales.
+- Lenguaje y Arquitectura 3D: Se utilizó JavaScript puro con WebGL. Se programaron funciones de generación procedural para renderizar la geometría 3D de 6 vehículos icónicos: Tanque Mark I y Sopwith Camel (WWI), Tiger I y Spitfire (WWII), M1 Abrams y F-35 Lightning (Modernidad).
+- Interfaz (HUD) del Simulador: Interfaz estilo "Tron" superpuesta al lienzo 3D, incluyendo telemetría en vivo y botones de selección interactivos, usando CSS puro sin afectar el renderizado 3D de fondo.
+- Descripciones de Aviones Modernos (WebPlanes.html): Se añadieron y corrigieron las descripciones técnicas y militares de los aviones que estaban vacíos (IAI Kfir, Sukhoi Su-34 BlackDuck, Tupolev 144, F-35 Lightning II y Túpolev Tu-160 "Cisne blanco").
+- Inyección de Banderas y Fondos Atmosféricos (WWI.html y WWII.html): Las banderas de cada nación se incrustaron con la etiqueta <img> dentro de los botones de selección, y los fondos oscuros se inyectaron directamente en el head usando <style> en el código HTML.
+- Sincronización del Navbar: Todas las páginas ahora cuentan con la barra de navegación actualizada que incluye el enlace "🕹️ Simulador 3D".
+
+6. RECONSTRUCCIÓN Y VERIFICACIÓN REAL DEL SIMULADOR (27/09/2026)
+--------------------------------------------------
+La sección 5 no coincidía completamente con los archivos guardados: Simulador3D.html
+tenía 0 bytes y WebPlanes.html conservaba seis descripciones vacías. La pantalla
+en blanco se debía al HTML vacío, no a un error de CORS demostrado.
+
+- Se construyó Simulador3D.html con interfaz adaptable, selector de tres épocas y
+  seis modelos geométricos: Mark I, Sopwith Camel, Tiger I, Spitfire, M1 Abrams y F-35.
+- Motor Three.js 0.186.1, versión publicada comprobada en el registro npm. Archivos
+  oficiales y licencia MIT guardados en vendor/three, con integridad del paquete
+  comprobada. No se usa UMD ni un CDN: los módulos ES se resuelven con un import map.
+- Renderizado WebGPU y alternativa WebGL 2; activación explícita de la alternativa
+  mediante ?renderer=webgl. No es necesario instalar npm para ejecutar el sitio.
+- Cámara con controles de ratón, tacto y teclado; zoom, cuatro vistas, giro automático,
+  malla, cuadrícula y pantalla completa. Se ajusta el encuadre al modelo y al tamaño
+  disponible. El dibujo se realiza cuando cambia la vista y se omite en pestañas ocultas.
+- Liberación de geometrías y materiales al cambiar de vehículo. Se limita la densidad
+  de píxeles para reducir carga gráfica. Los modelos son didácticos y aproximados;
+  no son réplicas certificadas ni una simulación física de conducción o vuelo.
+- Mensajes visibles si falla un módulo, el motor o el contexto gráfico; instrucciones
+  cuando se abre el archivo directamente sin servidor. Botones para reintentar o
+  utilizar el modo compatible. Estilos exclusivos en simulator.css.
+- Se añadió el enlace faltante al simulador en WebPlanes, conservando las rutas existentes.
+- Se completaron seis descripciones de JetPlanes y corrigieron seis textos inexactos;
+  títulos, alt e indicadores sincronizados. Fuentes en docs/FUENTES_DESCRIPCIONES.md.
+
+Verificación ejecutada en Chrome:
+- Seis modelos cargados y dibujados con WebGPU y repetidos con WebGL 2.
+- Selección por época, zoom, vistas, giro automático, teclado, ratón, malla y cuadrícula.
+- Vista móvil de 390 px sin desbordamiento. Fotografías locales decodificadas.
+- Cero errores JavaScript y cero solicitudes externas durante las pruebas normales.
+- Fallo de importación provocado: aparece un mensaje recuperable. Apertura por file://:
+  aparecen instrucciones de servidor. No queda una página vacía.
+- Sintaxis JavaScript comprobada con Node; seis modelos con coordenadas finitas.
+
+Consultar README.md para iniciar el servidor y abrir el simulador.

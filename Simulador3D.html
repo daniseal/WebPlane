@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101827">
+    <title>Simulador 3D · JetPlanes</title>
+    <link rel="icon" href="img/Splash.ico">
+    <link rel="stylesheet" href="simulator.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "./vendor/three/three.webgpu.js",
+                "three/webgpu": "./vendor/three/three.webgpu.js",
+                "three/addons/controls/OrbitControls.js": "./vendor/three/OrbitControls.js"
+            }
+        }
+    </script>
+    <script src="js/simulator-loader.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="WebPlanes.html"><img src="img/Splash.ico" alt="" width="40" height="40">JetPlanes</a>
+        <nav aria-label="Navegación principal">
+            <a href="WebPlanes.html">Aviones</a>
+            <a href="Tanques.html">Tanques</a>
+            <a href="WWI.html">WWI</a>
+            <a href="WWII.html">WWII</a>
+            <a href="WarBirds.html">WarBirds</a>
+            <a href="Simulador3D.html" aria-current="page">Simulador 3D</a>
+        </nav>
+    </header>
+
+    <main class="simulator">
+        <div class="page-heading">
+            <div><p class="eyebrow">ARCHIVO INTERACTIVO / JETPLANES</p><h1>Historia en tres dimensiones.</h1></div>
+            <p class="intro">Explora seis vehículos de tres épocas.<br>Gira, acerca y descubre sus formas.</p>
+        </div>
+
+        <div class="workspace">
+            <aside class="catalog panel" aria-labelledby="catalog-title">
+                <div class="section-heading"><h2 id="catalog-title">Elige una época</h2><span class="small-label">01 — 03</span></div>
+                <div class="era-filters" id="era-filters" role="group" aria-label="Época del vehículo">
+                    <button type="button" data-era="ww1" aria-pressed="true"><strong>WWI</strong><span>1914–1918</span></button>
+                    <button type="button" data-era="ww2" aria-pressed="false"><strong>WWII</strong><span>1939–1945</span></button>
+                    <button type="button" data-era="modern" aria-pressed="false"><strong>Moderna</strong><span>Actualidad</span></button>
+                </div>
+                <div class="vehicle-list" id="vehicle-list" role="group" aria-label="Vehículos disponibles" aria-busy="true"></div>
+                <p class="catalog-note">Modelos geométricos didácticos: permiten reconocer las formas principales, con proporciones aproximadas.</p>
+                <a class="catalog-link" id="era-link" href="WWI.html">Ver fotografías de esta época ↗</a>
+            </aside>
+
+            <section class="viewer panel" aria-label="Visor tridimensional">
+                <div class="viewer-topbar">
+                    <span class="live-indicator" id="render-status" role="status">Preparando visor</span>
+                    <div class="viewer-actions">
+                        <button type="button" id="reset-view" disabled title="Restablecer cámara (R)">Restablecer vista</button>
+                        <button type="button" id="fullscreen" disabled aria-label="Ver en pantalla completa" title="Pantalla completa">⛶</button>
+                    </div>
+                </div>
+                <div class="stage" id="stage" aria-busy="true">
+                    <canvas id="vehicle-canvas" tabindex="0" role="img" aria-label="Visor 3D de vehículos" aria-describedby="camera-help"></canvas>
+                    <div class="loading-panel" id="loading-panel" role="status" aria-live="polite">
+                        <span class="loader" id="loading-spinner" aria-hidden="true"></span>
+                        <h2 id="loading-title">Preparando el modelo 3D</h2>
+                        <p id="loading-message">Cargando el motor gráfico local…</p>
+                        <div class="error-actions" id="error-actions" hidden>
+                            <button type="button" id="retry">Volver a intentar</button>
+                            <button type="button" id="compatible">Usar modo compatible</button>
+                            <a href="WWI.html">Volver a las fotografías</a>
+                        </div>
+                    </div>
+                    <div class="orientation" aria-hidden="true"><span>3D</span><i></i><small>VISTA LIBRE</small></div>
+                    <div class="zoom-actions" aria-label="Acercamiento">
+                        <button type="button" id="zoom-in" disabled aria-label="Acercar cámara">+</button>
+                        <button type="button" id="zoom-out" disabled aria-label="Alejar cámara">−</button>
+                    </div>
+                </div>
+                <div class="view-toolbar">
+                    <div class="view-presets" role="group" aria-label="Vistas de cámara">
+                        <button type="button" data-view="perspective" disabled aria-pressed="true">Perspectiva</button>
+                        <button type="button" data-view="side" disabled aria-pressed="false">Lateral</button>
+                        <button type="button" data-view="front" disabled aria-pressed="false">Frontal</button>
+                        <button type="button" data-view="top" disabled aria-pressed="false">Superior</button>
+                    </div>
+                    <div class="view-options">
+                        <label><input type="checkbox" id="auto-rotate" disabled> Giro automático</label>
+                        <label><input type="checkbox" id="wireframe" disabled> Malla</label>
+                        <label><input type="checkbox" id="show-grid" checked disabled> Cuadrícula</label>
+                    </div>
+                </div>
+                <p class="camera-help" id="camera-help">Arrastra para girar · Rueda o dos dedos para acercar · Flechas para girar · R para restablecer</p>
+            </section>
+
+            <section class="vehicle-info panel" aria-labelledby="vehicle-name">
+                <div class="vehicle-copy">
+                    <p class="eyebrow" id="vehicle-category">COLECCIÓN HISTÓRICA</p>
+                    <h2 id="vehicle-name">Selecciona un vehículo</h2>
+                    <p id="vehicle-description">Su ficha aparecerá cuando se cargue el visor.</p>
+                </div>
+                <dl class="vehicle-facts"><div><dt>Época</dt><dd id="vehicle-era">—</dd></div><div><dt>País</dt><dd id="vehicle-country">—</dd></div><div><dt>Representación</dt><dd>Geométrica · aproximada</dd></div></dl>
+            </section>
+        </div>
+        <noscript><p class="noscript-message">El visor 3D necesita JavaScript. Actívalo en el navegador o visita los módulos de fotografías desde el menú.</p></noscript>
+        <footer class="simulator-footer"><span>JetPlanes · Colección de vehículos</span><details><summary>Información del visor</summary><p id="engine-info">El estado del motor gráfico se mostrará al iniciar.</p><p>Si abres el archivo directamente, usa Live Server o consulta las instrucciones del <a href="README.md">README</a>.</p></details></footer>
+    </main>
+</body>
+</html>
