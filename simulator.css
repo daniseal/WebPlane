@@ -1,7 +1,7 @@
 :root { color-scheme: dark; --bg: #0d1420; --panel: #141e2d; --line: #2a3b50; --text: #eef3f8; --muted: #a7b6c8; --accent: #e4b977; }
 * { box-sizing: border-box; }
 body { margin: 0; background: radial-gradient(ellipse at 80% 15%, #243044 0, transparent 48%), var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
-button, input { font: inherit; }
+button, input, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; cursor: pointer; border: 1px solid var(--line); border-radius: .5rem; background: #1b293c; padding: .6rem .85rem; transition: background .15s, border-color .15s; }
 button:hover:not(:disabled) { background: #2d4059; border-color: #6e87a6; }
@@ -32,15 +32,34 @@ h1 { font-size: clamp(1.65rem, 2.6vw, 2.65rem); font-weight: 650; letter-spacing
 .era-filters span { display: block; color: var(--muted); font-size: .59rem; margin-top: .3rem; }
 .era-filters button[aria-pressed="true"] { border-color: var(--accent); background: #e4b97712; color: var(--accent); }
 .vehicle-list { display: grid; gap: .75rem; min-height: 100px; }
-.vehicle-card { padding: 0; overflow: hidden; text-align: left; width: 100%; background: #0e1724; }
+.vehicle-card { padding: 0; overflow: hidden; text-align: left; width: 100%; background: #0e1724; display: flex; align-items: center; min-height: 80px; }
 .vehicle-card[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-.vehicle-card img { width: 100%; height: 112px; display: block; object-fit: cover; opacity: .8; }
+.vehicle-card img { width: 76px; height: 80px; display: block; object-fit: cover; opacity: .8; flex-shrink: 0; }
 .vehicle-card[aria-pressed="true"] img { opacity: 1; }
 .vehicle-card .card-copy { display: block; padding: .8rem; }
 .vehicle-card strong { display: block; font-size: .92rem; }
 .vehicle-card small { display: block; color: var(--muted); margin-top: .3rem; font-size: .7rem; }
 .catalog-note { font-size: .73rem; line-height: 1.6; color: var(--muted); margin: 1.25rem 0; }
 .catalog-link { font-size: .74rem; }
+.catalog-filters { display: grid; gap: .4rem; margin: 0 0 1rem; }
+.filter-label { font-size: .7rem; color: var(--muted); }
+.catalog-filters input, select { background: #0f1928; color: var(--text); border: 1px solid #42516a; border-radius: .4rem; padding: .5rem; min-width: 0; }
+.catalog-filters input, .catalog-filters select { width: 100%; font-size: .8rem; }
+.import-panel { margin-top: 1.3rem; border-top: 1px solid var(--line); padding-top: 1rem; font-size: .75rem; }
+.import-panel summary { cursor: pointer; color: var(--accent); }
+.import-panel p { color: var(--muted); line-height: 1.65; }
+.file-button { display: block; padding: .65rem; border: 1px solid #79694e; border-radius: .4rem; cursor: pointer; text-align: center; }
+.file-button:has(+ .file-input:focus-visible) { outline: 2px solid var(--accent); }
+.file-input { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
+.import-help { font-size: .65rem; }
+.import-panel button { width: 100%; font-size: .75rem; }
+.import-status { font-size: .75rem; line-height: 1.6; margin-bottom: 0; }
+.import-status[data-error="true"] { color: #ffc6b9; }
+.material-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding: 0 1rem .85rem; }
+.material-toolbar label { display: inline-flex; align-items: center; gap: .45rem; font-size: .72rem; color: #c6d1de; }
+.material-toolbar select { font-size: .7rem; padding: .3rem .5rem; }
+.turret-control input { width: 115px; }
+.turret-control output { width: 3rem; font-variant-numeric: tabular-nums; }
 .viewer { min-width: 0; }
 .viewer-topbar { padding: .65rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: .7rem; border-bottom: 1px solid var(--line); }
 .live-indicator { font-size: .75rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; }
@@ -104,7 +123,8 @@ input { accent-color: var(--accent); }
     .section-heading { margin-bottom: .7rem; }
     .era-filters { margin-bottom: .7rem; }
     .vehicle-list { grid-template-columns: repeat(2, minmax(0, 1fr)); min-height: 0; }
-    .vehicle-card img { height: 78px; }
+    .vehicle-card { display: block; }
+    .vehicle-card img { height: 74px; width: 100%; }
     .vehicle-card .card-copy { padding: .65rem; }
     .vehicle-card strong { font-size: .83rem; }
     .vehicle-card small { font-size: .63rem; }
@@ -113,6 +133,7 @@ input { accent-color: var(--accent); }
     .viewer-topbar { padding: .6rem .7rem; }
     .live-indicator { font-size: .65rem; }
     .view-toolbar { padding: .7rem; }
+    .material-toolbar { padding: 0 .7rem .7rem; gap: .7rem; }
     .view-presets { gap: .25rem; }
     .view-presets button { padding: .4rem .5rem; }
     .vehicle-info { padding: 1rem; }

@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { VEHICLES, createVehicle } from './simulator-models.js';
+import { paint } from './model-primitives.js';
+import { loadLocalVehicle, disposeObject } from './simulator-import.js';
 
 export async function startSimulator(showError) {
     const $ = (id) => document.getElementById(id);
@@ -11,16 +14,23 @@ export async function startSimulator(showError) {
     const renderer = new THREE.WebGPURenderer({ canvas, antialias: true, alpha: false, forceWebGL });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(stage.clientWidth, stage.clientHeight, false);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMapping = THREE.AgXToneMapping;
+    renderer.toneMappingExposure = 1.25;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     $('loading-message').textContent = 'Iniciando la aceleración gráfica…';
     await renderer.init();
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x182333);
-    scene.fog = new THREE.Fog(0x182333, 35, 100);
+    scene.background = new THREE.Color(0x20242a);
+    scene.fog = new THREE.Fog(0x20242a, 35, 100);
+    const environmentScene = new RoomEnvironment();
+    const environmentGenerator = new THREE.PMREMGenerator(renderer);
+    const environmentTarget = environmentGenerator.fromScene(environmentScene, 0.04);
+    scene.environment = environmentTarget.texture;
+    scene.environmentIntensity = 0.85;
+    environmentScene.dispose();
+    environmentGenerator.dispose();
     const camera = new THREE.PerspectiveCamera(38, stage.clientWidth / stage.clientHeight, 0.1, 250);
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
@@ -31,19 +41,20 @@ export async function startSimulator(showError) {
     controls.rotateSpeed = 0.65;
     controls.zoomSpeed = 0.8;
 
-    scene.add(new THREE.HemisphereLight(0xc7dfff, 0x646455, 2.4));
-    const keyLight = new THREE.DirectionalLight(0xffedcf, 3.3);
+    const fillLight = new THREE.HemisphereLight(0xc7dfff, 0x646455, 0.65);
+    scene.add(fillLight);
+    const keyLight = new THREE.DirectionalLight(0xffedcf, 3);
     keyLight.position.set(12, 20, 9);
     keyLight.castShadow = true;
-    keyLight.shadow.mapSize.set(1024, 1024);
+    keyLight.shadow.mapSize.set(2048, 2048);
     Object.assign(keyLight.shadow.camera, { left: -18, right: 18, top: 18, bottom: -18, near: 0.5, far: 70 });
     keyLight.shadow.normalBias = 0.04;
     scene.add(keyLight);
-    const rimLight = new THREE.DirectionalLight(0x82b8f2, 2);
+    const rimLight = new THREE.DirectionalLight(0xb6d6f2, 1.1);
     rimLight.position.set(-12, 10, -8);
     scene.add(rimLight);
 
-    const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshStandardMaterial({ color: 0x1c2938, roughness: 0.95 }));
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), paint(0x50575e, { seed: 810, roughness: 0.96, metalness: 0.03, scale: 40 }));
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = -0.035;
     ground.receiveShadow = true;
@@ -52,6 +63,7 @@ export async function startSimulator(showError) {
     grid.position.y = -0.02;
     grid.material.transparent = true;
     grid.material.opacity = 0.5;
+    grid.visible = $('show-grid').checked;
     scene.add(grid);
 
     const modelRoot = new THREE.Group();
@@ -66,19 +78,23 @@ export async function startSimulator(showError) {
     let failed = false;
     let lastTime = 0;
     let frames = 0;
+    let mixer = null;
+    let selectionRevision = 0;
+    let lastCatalogId = 'mark-i';
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
-    function disposeModel(model) {
-        const geometries = new Set();
-        const materials = new Set();
-        model.traverse((object) => {
-            if (object.geometry) geometries.add(object.geometry);
-            if (object.material) {
-                for (const material of [].concat(object.material)) materials.add(material);
-            }
-        });
-        geometries.forEach((geometry) => geometry.dispose());
-        materials.forEach((material) => material.dispose());
+    function setEnvironment(name) {
+        const outdoor = name === 'outdoor';
+        const background = outdoor ? 0x9aaeb9 : 0x20242a;
+        scene.background.setHex(background);
+        scene.fog.color.setHex(background);
+        scene.environmentIntensity = outdoor ? 0.6 : 0.85;
+        keyLight.color.setHex(outdoor ? 0xffeccd : 0xfff1dc);
+        keyLight.intensity = outdoor ? 4 : 3;
+        keyLight.position.set(outdoor ? 16 : 12, outdoor ? 15 : 20, 9);
+        fillLight.intensity = outdoor ? 1.1 : 0.65;
+        ground.material.color.setHex(outdoor ? 0xd1c9b8 : 0xffffff);
+        dirty = true;
     }
 
     function updateFitDistance(direction = camera.position.clone().sub(controls.target).normalize()) {
@@ -105,6 +121,7 @@ export async function startSimulator(showError) {
     }
 
     function setView(view = 'perspective') {
+        if (currentModel) modelBounds.setFromObject(currentModel);
         const directions = {
             perspective: new THREE.Vector3(1.35, 0.85, 1.6),
             side: new THREE.Vector3(0, 0.12, 1),
@@ -128,14 +145,11 @@ export async function startSimulator(showError) {
         dirty = true;
     }
 
-    function selectVehicle(id) {
-        const vehicle = VEHICLES.find((entry) => entry.id === id);
-        if (!vehicle) throw new Error('Vehículo no encontrado: ' + id);
-        // Construir primero permite conservar el modelo anterior si hubiera un fallo.
-        const nextModel = createVehicle(id);
+    function mountModel(nextModel, vehicle, animations = []) {
         if (currentModel) {
+            if (mixer) { mixer.stopAllAction(); mixer.uncacheRoot(currentModel); mixer = null; }
             modelRoot.remove(currentModel);
-            disposeModel(currentModel);
+            disposeObject(currentModel);
         }
         currentModel = nextModel;
         modelRoot.add(currentModel);
@@ -149,37 +163,62 @@ export async function startSimulator(showError) {
         const sphere = bounds.getBoundingSphere(new THREE.Sphere());
         modelRadius = sphere.radius;
         controls.target.copy(sphere.center);
-        selectedId = id;
-        document.querySelectorAll('[data-vehicle]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.vehicle === id)));
+        selectedId = vehicle.id;
+        document.querySelectorAll('[data-vehicle]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.vehicle === selectedId)));
         $('vehicle-name').textContent = vehicle.name;
         $('vehicle-description').textContent = vehicle.description;
-        $('vehicle-category').textContent = vehicle.type === 'tank' ? 'VEHÍCULO TERRESTRE / BLINDADO' : 'AVIACIÓN / CAZA';
+        $('vehicle-category').textContent = vehicle.type === 'tank' ? 'VEHÍCULO TERRESTRE / BLINDADO' : vehicle.type === 'aircraft' ? 'AVIACIÓN / CAZA' : 'MODELO GLB / ARCHIVO LOCAL';
         $('vehicle-era').textContent = vehicle.eraLabel;
         $('vehicle-country').textContent = vehicle.country;
         canvas.setAttribute('aria-label', 'Modelo 3D de ' + vehicle.name + '. Usa las flechas para girar y + o − para acercar o alejar.');
-        canvas.dataset.vehicle = id;
+        canvas.dataset.vehicle = vehicle.id;
+        $('vehicle-representation').textContent = vehicle.id === 'local-glb' ? 'Modelo GLB importado' : 'Modelo con materiales PBR';
+        $('return-catalog').hidden = vehicle.id !== 'local-glb';
+        $('turret-control').hidden = !currentModel.userData.turret;
+        $('turret-angle').value = '0';
+        $('turret-value').textContent = '0°';
+        if (animations.length) {
+            mixer = new THREE.AnimationMixer(currentModel);
+            animations.forEach((clip) => mixer.clipAction(clip).play());
+        }
+        $('animate-parts').checked = false;
+        $('animate-parts').disabled = !currentModel.userData.animate && !mixer;
         applyWireframe();
         setView();
         dirty = true;
     }
 
-    function chooseEra(era) {
-        currentEra = era;
+    function selectVehicle(id) {
+        const vehicle = VEHICLES.find((entry) => entry.id === id);
+        if (!vehicle) throw new Error('Vehículo no encontrado: ' + id);
+        const nextModel = createVehicle(id);
+        selectionRevision++;
+        lastCatalogId = id;
+        $('import-status').textContent = '';
+        mountModel(nextModel, vehicle);
+    }
+
+    function renderCatalog(selectFirst = false) {
         const list = $('vehicle-list');
         list.replaceChildren();
-        document.querySelectorAll('[data-era]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.era === era)));
-        const vehicles = VEHICLES.filter((vehicle) => vehicle.era === era);
+        const normalize = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[-\s.]/g, '');
+        const query = normalize($('vehicle-search').value.trim());
+        const type = $('vehicle-type').value;
+        const vehicles = VEHICLES.filter((vehicle) => vehicle.era === currentEra
+            && (type === 'all' || vehicle.type === type)
+            && normalize(`${vehicle.name} ${vehicle.country}`).includes(query))
+            .sort((a, b) => (a.type === 'tank' ? 0 : 1) - (b.type === 'tank' ? 0 : 1));
         for (const vehicle of vehicles) {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'vehicle-card';
             button.dataset.vehicle = vehicle.id;
-            button.setAttribute('aria-pressed', 'false');
+            button.setAttribute('aria-pressed', String(vehicle.id === selectedId));
             const image = document.createElement('img');
             image.src = vehicle.photo;
             image.alt = '';
-            image.width = 230;
-            image.height = 112;
+            image.width = 76;
+            image.height = 80;
             const copy = document.createElement('span');
             copy.className = 'card-copy';
             const title = document.createElement('strong');
@@ -191,9 +230,18 @@ export async function startSimulator(showError) {
             button.addEventListener('click', () => selectVehicle(vehicle.id));
             list.append(button);
         }
-        $('era-link').href = { ww1: 'WWI.html', ww2: 'WWII.html', modern: 'WebPlanes.html' }[era];
+        $('catalog-count').textContent = `${vehicles.length} de ${VEHICLES.length}`;
+        $('catalog-empty').hidden = vehicles.length > 0;
         list.setAttribute('aria-busy', 'false');
-        selectVehicle(vehicles[0].id);
+        if (selectFirst && vehicles.length) selectVehicle(vehicles[0].id);
+    }
+
+    function chooseEra(era) {
+        currentEra = era;
+        $('vehicle-search').value = '';
+        document.querySelectorAll('[data-era]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.era === era)));
+        $('era-link').href = { ww1: 'WWI.html', ww2: 'WWII.html', modern: 'WebPlanes.html' }[era];
+        renderCatalog(true);
     }
 
     function zoom(factor) {
@@ -224,6 +272,47 @@ export async function startSimulator(showError) {
     $('wireframe').addEventListener('change', applyWireframe);
     $('show-grid').addEventListener('change', () => { grid.visible = $('show-grid').checked; dirty = true; });
     $('auto-rotate').addEventListener('change', () => { controls.autoRotate = $('auto-rotate').checked; dirty = true; });
+    $('vehicle-search').addEventListener('input', () => renderCatalog());
+    $('vehicle-type').addEventListener('change', () => renderCatalog());
+    $('environment-select').addEventListener('change', () => setEnvironment($('environment-select').value));
+    $('animate-parts').addEventListener('change', () => { dirty = true; });
+    $('turret-angle').addEventListener('input', () => {
+        if (currentModel?.userData.turret) {
+            currentModel.userData.turret.rotation.y = THREE.MathUtils.degToRad(Number($('turret-angle').value));
+            $('turret-value').textContent = $('turret-angle').value + '°';
+            dirty = true;
+        }
+    });
+    $('return-catalog').addEventListener('click', () => selectVehicle(lastCatalogId));
+    $('glb-file').addEventListener('change', async () => {
+        const file = $('glb-file').files[0];
+        if (!file) return;
+        const revision = ++selectionRevision;
+        $('import-status').dataset.error = 'false';
+        $('import-status').textContent = 'Abriendo ' + file.name + '…';
+        $('glb-file').disabled = true;
+        try {
+            const imported = await loadLocalVehicle(file);
+            if (revision !== selectionRevision) { disposeObject(imported.group); return; }
+            const extent = new THREE.Box3().setFromObject(imported.group).getSize(new THREE.Vector3());
+            const largest = Math.max(extent.x, extent.y, extent.z);
+            if (largest < 1 || largest > 35) imported.group.scale.multiplyScalar(12 / largest);
+            imported.group.traverse((object) => { if (object.isMesh) { object.castShadow = true; object.receiveShadow = true; } });
+            mountModel(imported.group, {
+                id: 'local-glb', name: imported.name, eraLabel: 'Archivo local', country: '—', type: 'imported',
+                description: 'Modelo cargado desde tu equipo. Conserva sus materiales y texturas; se ajusta su tamaño para encuadrarlo en el visor.'
+            }, imported.animations);
+            $('import-status').textContent = 'Modelo cargado. El archivo no se ha enviado a ningún servidor.';
+        } catch (error) {
+            if (revision === selectionRevision) {
+                $('import-status').dataset.error = 'true';
+                $('import-status').textContent = error.message || 'No se pudo leer el modelo GLB.';
+            }
+        } finally {
+            $('glb-file').disabled = false;
+            $('glb-file').value = '';
+        }
+    });
     canvas.addEventListener('keydown', (event) => {
         if (event.key.toLowerCase() === 'r') { event.preventDefault(); resetView(); return; }
         if (['+', '=', '-', '_'].includes(event.key)) { event.preventDefault(); zoom(['+', '='].includes(event.key) ? 0.85 : 1.18); return; }
@@ -280,6 +369,7 @@ export async function startSimulator(showError) {
     };
 
     chooseEra(currentEra);
+    $('total-vehicles').textContent = VEHICLES.length;
     renderer.render(scene, camera);
     $('loading-panel').hidden = true;
     stage.setAttribute('aria-busy', 'false');
@@ -288,7 +378,8 @@ export async function startSimulator(showError) {
     const backend = renderer.backend.isWebGPUBackend ? 'WebGPU' : 'WebGL 2';
     viewer.dataset.backend = backend;
     $('engine-info').textContent = `Three.js ${THREE.REVISION} · ${backend} · motor y modelos locales. Representaciones geométricas sin simulación física.`;
-    viewer.querySelectorAll('button, input').forEach((element) => { element.disabled = false; });
+    viewer.querySelectorAll('button, input, select').forEach((element) => { element.disabled = false; });
+    $('animate-parts').disabled = !currentModel.userData.animate && !mixer;
     if (!document.fullscreenEnabled) $('fullscreen').hidden = true;
 
     renderer.setAnimationLoop((time) => {
@@ -297,8 +388,9 @@ export async function startSimulator(showError) {
         lastTime = time;
         try {
             controls.update(delta);
-            const animate = controls.autoRotate && !reducedMotion.matches && currentModel?.userData.animate;
-            if (animate) { currentModel.userData.animate(delta); dirty = true; }
+            const animate = $('animate-parts').checked && !reducedMotion.matches;
+            if (animate && currentModel?.userData.animate) { currentModel.userData.animate(delta); dirty = true; }
+            if (animate && mixer) { mixer.update(delta); dirty = true; }
             if (!dirty && !controls.autoRotate) return;
             renderer.render(scene, camera);
             dirty = false;
@@ -317,7 +409,9 @@ export async function startSimulator(showError) {
         meshes: currentModel ? countMeshes(currentModel) : 0,
         camera: camera.position.toArray(), target: controls.target.toArray(),
         wireframe: $('wireframe').checked, grid: grid.visible, autoRotate: controls.autoRotate,
-        geometries: renderer.info.memory.geometries
+        geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures,
+        environment: $('environment-select').value, turret: currentModel?.userData.turret?.rotation.y,
+        animated: $('animate-parts').checked, vehicleCount: VEHICLES.length
     });
     function countMeshes(model) { let count = 0; model.traverse((object) => { if (object.isMesh) count++; }); return count; }
     window.addEventListener('pagehide', (event) => {
@@ -325,7 +419,9 @@ export async function startSimulator(showError) {
         renderer.setAnimationLoop(null);
         resizeObserver.disconnect();
         controls.dispose();
-        disposeModel(scene);
+        if (mixer) { mixer.stopAllAction(); mixer.uncacheRoot(currentModel); }
+        disposeObject(scene);
+        environmentTarget.dispose();
         renderer.dispose();
     }, { once: true });
 }

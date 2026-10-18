@@ -12,7 +12,8 @@
             "imports": {
                 "three": "./vendor/three/three.webgpu.js",
                 "three/webgpu": "./vendor/three/three.webgpu.js",
-                "three/addons/controls/OrbitControls.js": "./vendor/three/OrbitControls.js"
+                "three/addons/controls/OrbitControls.js": "./vendor/three/OrbitControls.js",
+                "three/addons/": "./vendor/three/addons/"
             }
         }
     </script>
@@ -34,20 +35,35 @@
     <main class="simulator">
         <div class="page-heading">
             <div><p class="eyebrow">ARCHIVO INTERACTIVO / JETPLANES</p><h1>Historia en tres dimensiones.</h1></div>
-            <p class="intro">Explora seis vehículos de tres épocas.<br>Gira, acerca y descubre sus formas.</p>
+            <p class="intro">Explora <span id="total-vehicles">12</span> vehículos de tres épocas.<br>Materiales, detalles y perspectivas.</p>
         </div>
 
         <div class="workspace">
             <aside class="catalog panel" aria-labelledby="catalog-title">
-                <div class="section-heading"><h2 id="catalog-title">Elige una época</h2><span class="small-label">01 — 03</span></div>
+                <div class="section-heading"><h2 id="catalog-title">Elige una época</h2><span class="small-label" id="catalog-count">12 vehículos</span></div>
                 <div class="era-filters" id="era-filters" role="group" aria-label="Época del vehículo">
                     <button type="button" data-era="ww1" aria-pressed="true"><strong>WWI</strong><span>1914–1918</span></button>
                     <button type="button" data-era="ww2" aria-pressed="false"><strong>WWII</strong><span>1939–1945</span></button>
                     <button type="button" data-era="modern" aria-pressed="false"><strong>Moderna</strong><span>Actualidad</span></button>
                 </div>
+                <div class="catalog-filters">
+                    <label class="filter-label" for="vehicle-search">Buscar en esta época</label>
+                    <input type="search" id="vehicle-search" placeholder="Nombre o país" autocomplete="off">
+                    <select id="vehicle-type" aria-label="Tipo de vehículo"><option value="all">Tanques y aviones</option><option value="tank">Solo tanques</option><option value="aircraft">Solo aviones</option></select>
+                </div>
                 <div class="vehicle-list" id="vehicle-list" role="group" aria-label="Vehículos disponibles" aria-busy="true"></div>
-                <p class="catalog-note">Modelos geométricos didácticos: permiten reconocer las formas principales, con proporciones aproximadas.</p>
+                <p id="catalog-empty" class="catalog-note" hidden>No hay coincidencias. Prueba otro nombre o tipo de vehículo.</p>
+                <p class="catalog-note">Modelos de representación con texturas y detalles. Sus proporciones son aproximadas.</p>
                 <a class="catalog-link" id="era-link" href="WWI.html">Ver fotografías de esta época ↗</a>
+                <details class="import-panel">
+                    <summary>Abrir un modelo detallado</summary>
+                    <p>Carga un GLB propio o con licencia, con sus texturas incluidas. El archivo se procesa en tu navegador.</p>
+                    <label class="file-button" for="glb-file">Elegir archivo GLB</label>
+                    <input type="file" id="glb-file" accept=".glb,model/gltf-binary" class="file-input">
+                    <p class="import-help">Máximo 50 MB. Exportación sin Draco, Meshopt ni KTX2.</p>
+                    <button type="button" id="return-catalog" hidden>Volver al catálogo</button>
+                </details>
+                <p id="import-status" class="import-status" role="status" aria-live="polite"></p>
             </aside>
 
             <section class="viewer panel" aria-label="Visor tridimensional">
@@ -86,8 +102,13 @@
                     <div class="view-options">
                         <label><input type="checkbox" id="auto-rotate" disabled> Giro automático</label>
                         <label><input type="checkbox" id="wireframe" disabled> Malla</label>
-                        <label><input type="checkbox" id="show-grid" checked disabled> Cuadrícula</label>
+                        <label><input type="checkbox" id="show-grid" disabled> Cuadrícula</label>
                     </div>
+                </div>
+                <div class="material-toolbar">
+                    <label>Iluminación <select id="environment-select" disabled><option value="studio">Estudio</option><option value="outdoor">Exterior</option></select></label>
+                    <label><input type="checkbox" id="animate-parts" disabled> Animar piezas</label>
+                    <label class="turret-control" id="turret-control" hidden>Torreta <input type="range" id="turret-angle" min="-180" max="180" value="0" step="1" disabled><output id="turret-value">0°</output></label>
                 </div>
                 <p class="camera-help" id="camera-help">Arrastra para girar · Rueda o dos dedos para acercar · Flechas para girar · R para restablecer</p>
             </section>
@@ -98,7 +119,7 @@
                     <h2 id="vehicle-name">Selecciona un vehículo</h2>
                     <p id="vehicle-description">Su ficha aparecerá cuando se cargue el visor.</p>
                 </div>
-                <dl class="vehicle-facts"><div><dt>Época</dt><dd id="vehicle-era">—</dd></div><div><dt>País</dt><dd id="vehicle-country">—</dd></div><div><dt>Representación</dt><dd>Geométrica · aproximada</dd></div></dl>
+                <dl class="vehicle-facts"><div><dt>Época</dt><dd id="vehicle-era">—</dd></div><div><dt>País</dt><dd id="vehicle-country">—</dd></div><div><dt>Representación</dt><dd id="vehicle-representation">Modelo con materiales PBR</dd></div></dl>
             </section>
         </div>
         <noscript><p class="noscript-message">El visor 3D necesita JavaScript. Actívalo en el navegador o visita los módulos de fotografías desde el menú.</p></noscript>
